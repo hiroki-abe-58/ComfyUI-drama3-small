@@ -1,0 +1,43 @@
+These Fish Audio Materials are licensed under the Fish Audio Community License, Version 1.0. Copyright © 39 AI, INC. All Rights Reserved.
+
+Built with Fish Audio.
+
+drama3-small is a Derivative Work of Fish Audio Drama 3 (https://huggingface.co/fishaudio/drama-3).
+The attribution above applies to the Fish Audio Materials. The changes listed below were made by
+pentacoxian-dev; Fish Audio does not sponsor or endorse this Derivative Work.
+
+How the model weights (drama3-small-IQ3_XXS.gguf, downloaded separately) were modified:
+- Routed experts were pruned per layer using speech-calibrated routing statistics. Layers 0, 1, 2
+  and 36 keep all 256 experts; every other layer keeps 100 or 101 of 256 (4,640 of 10,240 expert
+  slots). Routers were cut to the kept rows.
+- The kept experts were quantized to IQ3_XXS using an importance matrix from speech calibration
+  data. The dense backbone (attention / Gated DeltaNet), the embeddings and the multi-token audio
+  tower were quantized to Q8_0. The codec weights are unchanged (F16).
+- The output head was reduced to the EOS row plus the 4,096 semantic-token rows (speech only).
+- Routers and shared experts were refit layer by layer against the original model's activations.
+- The result was distilled from the original model for 100 optimizer steps on Japanese and English
+  speech. Rank-64 LoRA updates of the attention and Gated DeltaNet projections were merged into the
+  weights; routers, shared experts, norms and the speech head were updated directly.
+
+How the code in drama3_torch/ relates to the Fish Audio Materials:
+- model.py, codec.py and text.py reimplement the Drama 3 model, codec and prompt format from
+  fish-speech (github.com/fishaudio/fish-speech, commit 1ff3c3e, files
+  models/text2semantic/fish_omni/*, models/dac/{modded_dac,rvq}.py, configs/modded_dac_vq.yaml).
+  Changes: weights are read from the GGUF and kept quantized (Q8_0 / IQ3_XXS) with fused
+  dequantizing matmul kernels; per-layer expert counts and the speech-only head are supported;
+  the codec runs with folded weight normalization, without the descript-audio-codec / audiotools
+  packages, in chunks; decoding uses static buffers and CUDA graphs.
+- generate.py follows the sampler of the audio.cpp fish_drama3 port (github.com/JarodMica/audio.cpp)
+  and adds drama3-small's pause fix (silence-code masking with a per-take adaptive silence list,
+  and a length guard). silence_codes.json was derived from drama3-small's own renders.
+
+Third-party notices:
+- drama3_torch/quants.py contains the IQ3_XXS grid table from ggml (github.com/ggml-org/ggml),
+  MIT License, Copyright (c) 2023-2024 The ggml authors:
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+  associated documentation files (the "Software"), to deal in the Software without restriction,
+  including without limitation the rights to use, copy, modify, merge, publish, distribute,
+  sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions: The above copyright notice and this
+  permission notice shall be included in all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.

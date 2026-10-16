@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-drama3-small"
+version = "0.1.0"
+description = "Expressive Japanese / English TTS, voice generation and voice cloning with drama3-small (a 12 GB compression of Fish Audio Drama 3), in pure PyTorch. Built with Fish Audio."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = ["numpy", "tokenizers", "huggingface_hub"]
+
+[project.urls]
+Repository = "https://github.com/pentaCoxian/ComfyUI-drama3-small"
+Model = "https://huggingface.co/pentacoxian-dev/drama3-small-GGUF"
+
+[tool.comfy]
+DisplayName = "drama3-small (Fish Audio Drama 3, 12 GB)"

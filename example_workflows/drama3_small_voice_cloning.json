@@ -1,0 +1,413 @@
+{
+  "id": "06bd808f-0eca-4743-9fa7-ef535d4f9df6",
+  "revision": 0,
+  "last_node_id": 6,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "Drama3SmallLoader",
+      "pos": [
+        40,
+        60
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "gguf",
+          "name": "gguf",
+          "type": "COMBO",
+          "widget": {
+            "name": "gguf"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "device",
+          "name": "device",
+          "type": "COMBO",
+          "widget": {
+            "name": "device"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "precision",
+          "name": "precision",
+          "type": "COMBO",
+          "widget": {
+            "name": "precision"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "expert_offload",
+          "name": "expert_offload",
+          "type": "COMBO",
+          "widget": {
+            "name": "expert_offload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "DRAMA3_MODEL",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Drama3SmallLoader"
+      },
+      "widgets_values": [
+        "drama3-small-IQ3_XXS.gguf",
+        "auto",
+        "auto",
+        "none"
+      ],
+      "widgets_values_named": {
+        "gguf": "drama3-small-IQ3_XXS.gguf",
+        "device": "auto",
+        "precision": "auto",
+        "expert_offload": "none"
+      }
+    },
+    {
+      "id": 6,
+      "type": "LoadAudio",
+      "pos": [
+        40,
+        260
+      ],
+      "size": [
+        282.798828125,
+        136
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "COMBO",
+          "widget": {
+            "name": "audio"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "audioUI",
+          "name": "audioUI",
+          "type": "AUDIO_UI",
+          "widget": {
+            "name": "audioUI"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "choose file to upload",
+          "name": "upload",
+          "type": "AUDIOUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "AUDIO",
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "your_reference.wav",
+        ""
+      ],
+      "widgets_values_named": {
+        "audio": "your_reference.wav",
+        "upload": ""
+      }
+    },
+    {
+      "id": 2,
+      "type": "Drama3SmallTTS",
+      "pos": [
+        420,
+        60
+      ],
+      "size": [
+        400,
+        402
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "DRAMA3_MODEL",
+          "link": 1
+        },
+        {
+          "localized_name": "reference_audio",
+          "name": "reference_audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 2
+        },
+        {
+          "localized_name": "text",
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "voice_description",
+          "name": "voice_description",
+          "type": "STRING",
+          "widget": {
+            "name": "voice_description"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "temperature",
+          "name": "temperature",
+          "type": "FLOAT",
+          "widget": {
+            "name": "temperature"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "top_p",
+          "name": "top_p",
+          "type": "FLOAT",
+          "widget": {
+            "name": "top_p"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "top_k",
+          "name": "top_k",
+          "type": "INT",
+          "widget": {
+            "name": "top_k"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "max_seconds",
+          "name": "max_seconds",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_seconds"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "max_pause_seconds",
+          "name": "max_pause_seconds",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_pause_seconds"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "reference_text",
+          "name": "reference_text",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "reference_text"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "streaming",
+          "name": "streaming",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "streaming"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "keep_model_loaded",
+          "name": "keep_model_loaded",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "keep_model_loaded"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            3
+          ]
+        },
+        {
+          "localized_name": "spoken_text",
+          "name": "spoken_text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Drama3SmallTTS"
+      },
+      "widgets_values": [
+        "[laughs] まさかそんなオチだとは思わなかった。[sighs] でも、ちょっと安心したよ。",
+        "",
+        3,
+        "fixed",
+        0.7,
+        0.7,
+        30,
+        45,
+        0.45,
+        "Replace with the exact words spoken in your reference clip.",
+        false,
+        true
+      ],
+      "widgets_values_named": {
+        "text": "[laughs] まさかそんなオチだとは思わなかった。[sighs] でも、ちょっと安心したよ。",
+        "voice_description": "",
+        "seed": 3,
+        "fixed": "fixed",
+        "temperature": 0.7,
+        "top_p": 0.7,
+        "top_k": 30,
+        "max_seconds": 45,
+        "max_pause_seconds": 0.45,
+        "reference_text": "Replace with the exact words spoken in your reference clip.",
+        "streaming": false,
+        "keep_model_loaded": true
+      }
+    },
+    {
+      "id": 3,
+      "type": "PreviewAudio",
+      "pos": [
+        900,
+        60
+      ],
+      "size": [
+        270,
+        88
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 3
+        },
+        {
+          "localized_name": "audioUI",
+          "name": "audioUI",
+          "type": "AUDIO_UI",
+          "widget": {
+            "name": "audioUI"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAudio"
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "DRAMA3_MODEL"
+    ],
+    [
+      2,
+      6,
+      0,
+      2,
+      1,
+      "AUDIO"
+    ],
+    [
+      3,
+      2,
+      0,
+      3,
+      0,
+      "AUDIO"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7361963190184049,
+      "offset": [
+        241.66666666666674,
+        226.04583333333335
+      ]
+    }
+  },
+  "version": 0.4
+}

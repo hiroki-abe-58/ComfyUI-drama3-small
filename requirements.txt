@@ -1,0 +1,5 @@
+# All of these normally come with ComfyUI. Triton (bundled with PyTorch on Linux; `triton-windows`
+# on Windows) makes generation fast; without it the engine falls back to slow pure-torch kernels.
+numpy
+tokenizers
+huggingface_hub
